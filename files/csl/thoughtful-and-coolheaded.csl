@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0"
+  demote-non-dropping-particle="never" default-locale="en-US">
+  <info>
+    <title>Thoughful and coolheaded</title>
+    <id>None</id>
+    <link href="https://www.dxdt.ch/thoughtful-and-coolheaded" rel="self" />
+    <author>
+      <name>Lucas Marti</name>
+    </author>
+    <category citation-format="author-date" />
+    <category field="generic-base" />
+    <summary>A nice author-journal style suitable for theses</summary>
+    <updated>2025-03-14T12:00:57Z</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a
+      Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="en">
+  </locale>
+  <macro name="title">
+    <choose>
+      <if match="any" type="software webpage">
+        <text variable="title" suffix=". " text-case="lowercase" font-style="italic" />
+      </if>
+      <else>
+        <text variable="title" quotes="true" />
+      </else>
+    </choose>
+  </macro>
+  <macro name="editor">
+    <choose>
+      <if match="any" type="book chapter">
+        <names variable="editor" delimiter=", ">
+          <label form="short" />
+          <name and="text" initialize-with=". " delimiter=", " prefix=" " />
+        </names>
+      </if>
+    </choose>
+  </macro>
+  <macro name="author">
+    <names variable="author" font-weight="bold">
+      <name initialize-with=". ">
+        <name-part name="given" initialize="true" />
+        <name-part name="family" text-case="uppercase" />
+      </name>
+      <et-al font-style="italic" />
+      <substitute>
+        <names variable="editor" />
+        <names variable="translator" />
+        <text variable="title" />
+      </substitute>
+    </names>
+  </macro>
+  <macro name="publisher">
+    <choose>
+      <if match="any" type="book chapter">
+        <group delimiter=": ">
+          <text variable="publisher-place" />
+          <text variable="publisher" />
+        </group>
+      </if>
+    </choose>
+  </macro>
+  <macro name="year-date">
+    <choose>
+      <if match="any" variable="issued">
+        <date date-parts="year" form="numeric" variable="issued" />
+      </if>
+      <else>
+        <text term="no date" form="short" />
+      </else>
+    </choose>
+  </macro>
+  <macro name="edition">
+    <choose>
+      <if is-numeric="edition">
+        <group delimiter=" ">
+          <number variable="edition" form="ordinal" />
+          <text term="edition" form="short" text-case="capitalize-first" />
+        </group>
+      </if>
+      <else>
+        <text variable="edition" />
+      </else>
+    </choose>
+  </macro>
+  <macro name="click">
+    <choose>
+      <if variable="DOI">
+        <text variable="DOI" prefix="doi: " />
+      </if>
+      <else>
+        <group>
+          <text variable="URL" />
+          <date variable="accessed" prefix=" (retrieved " suffix=")">
+            <date-part name="day" suffix=" " />
+            <date-part name="month" suffix=" " />
+            <date-part name="year" />
+          </date>
+        </group>
+      </else>
+    </choose>
+  </macro>
+ <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number" />
+    </sort>
+    <layout delimiter="," prefix="[" suffix="]">
+      <text variable="citation-number" />
+      <group prefix=", " delimiter=" ">
+        <label variable="locator" form="short"/>
+        <text variable="locator"/>
+    </group>
+    </layout>
+  </citation>
+  <bibliography hanging-indent="true" et-al-min="4" et-al-use-first="1">
+    <sort>
+      <key variable="citation-number" />
+    </sort>
+    <layout>
+      <group delimiter=" ">
+        <text variable="citation-number" suffix=". " />
+        <text macro="author" />
+        <text macro="year-date" prefix="(" suffix=")." />
+        <text macro="title" />
+        <text variable="container-title" font-style="italic" suffix=". " />
+        <text macro="publisher" suffix=". " />
+        <text macro="click" />
+      </group>
+    </layout>
+  </bibliography>
+</style>
