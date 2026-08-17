@@ -3,6 +3,7 @@
 #let title_fonts = (
   tex_gyre: "Tex Gyre Heros",
   miriam: "Miriam Libre",
+  grotesk: "Space Grotesk",
 )
 #let body_fonts = (
   old_standard: "Old Standard",
@@ -22,15 +23,15 @@
 #let calligraphic_fonts = (
   svatba: "LukasSvatba",
   auriocus: "AuriocusKalligraphicus",
-  skrivana: "JanaSkrivana",
+  
 )
 
 
-#let title_font = title_fonts.tex_gyre
-#let body_font = body_fonts.gentium
-#let math_font = math_fonts.latex
-#let mono_font = mono_fonts.roboto
-#let calligraphic_font = calligraphic_fonts.auriocus
+#let title_font = sys.inputs.at("title-font",default:title_fonts.tex_gyre)
+#let body_font = sys.inputs.at("body-font",default:body_fonts.gentium)
+#let math_font = sys.inputs.at("math-font",default:math_fonts.latex)
+#let mono_font = sys.inputs.at("mono-font",default:mono_fonts.roboto)
+#let calligraphic_font = sys.inputs.at("calligraphic-font",default:calligraphic_fonts.auriocus)
 
 
 #let body_font_size = 11pt

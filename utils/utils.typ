@@ -76,21 +76,13 @@
   circle(pos, radius: radius, fill: gradient.radial(white, color), stroke: (thickness: .5pt, paint: black))
 }
 
-// Helper function to draw a panel with border and labels
-#let draw-panel(x-offset, y-offset, title, step-num, panel-content) = {
-  import draw: *
-  group({
-    translate((x-offset, y-offset, 0))
-    panel-content
-    // Border
-    rect((-0.6, -0.5), (3.8, 2.75), stroke: (dash: "dotted", thickness: .5pt))
-    content(
-      (1.2, 2.5),
-      box(text(align(center, title), size: 10pt), inset: 4pt, fill: white),
-      anchor: "south",
-      fill: g_gray,
-      padding: 0.1,
-    )
-    content((3.35, 2.8), text(font: calligraphic_font, size: 16pt)[#step-num], anchor: "south")
-  })
-}
+
+
+
+#let ket(state) = { $lr(|#state chevron.r, size: #{ 50% + 0pt })$ }
+#let abs(x) = { $lr(|#x|)$ }
+#let frob(x) = { $lr(||#x||_F)$ }
+#let bra(state) = { $lr(chevron.l #state|, size: #{ 50% + 0pt })$ }
+#let expect(state) = { $lr(chevron.l #state chevron.r, size: #{ 50% + 0pt })$ }
+#let braket(s1, s2) = { $lr(chevron.l #s1|#s2 chevron.r, size: #{ 50% + 0pt })$ }
+#let ketbra(s1, s2) = { $lr(| #s1 chevron.r chevron.l #s2 |, size: #{ 50% + 0pt })$ }

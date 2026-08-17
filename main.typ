@@ -24,6 +24,9 @@
 
 
 #include "chapters/quantum_physics.typ"
+#include "chapters/toric_code.typ"
+
+#pagebreak()
 #include "chapters/outlook.typ"
 
 #bibliography("sources/sources.bib", style: "files/csl/thoughtful-and-coolheaded.csl") <bibliography>

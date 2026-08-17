@@ -9,17 +9,17 @@
   #align(
     center,
     text(
-      [The Faculty of Natural Sciences \
-        University name
+      [The Faculty of Sciences \
+        University of ABC
         for \
         the doctoral degree \
 
-        *Doctor rerum naturalium (Dr. rer. nat.)* \
+        *Doctor rerum typorum (Dr. rer. typ.)* \
 
         submitted by \
-        #upper()[*John Doe*] \
+        #upper()[*Otto Matic*] \
         born in \
-        #upper()[*Smallville*]
+        #upper()[*Hachtel*]
       ],
       tracking: 1pt,
     ),

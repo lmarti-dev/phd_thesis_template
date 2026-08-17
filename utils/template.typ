@@ -1,7 +1,7 @@
 // LTeX: enabled=false
 
 #import "./functions.typ": *
-#import "./cetz_utils.typ": *
+#import "utils.typ": *
 
 
 #let thesis_style(doc, printable: false, debug: true, draft: true) = {
