@@ -29,7 +29,7 @@
 #pagebreak()
 #include "chapters/outlook.typ"
 
-#bibliography("sources/sources.bib", style: "files/csl/thoughtful-and-coolheaded.csl") <bibliography>
+#bibliography("sources/sources.bib", style: bib_csl) <bibliography>
 
 #include "chapters/appendix.typ"
 

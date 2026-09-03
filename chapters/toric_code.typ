@@ -2,6 +2,8 @@
 #import "../bib_state.typ": bib_state
 #context bib_state.get()
 
+
+
 == The toric code
 <toric-code>
 Toric code are essentially the definition of logical qubits on a periodic lattice (a torus) of physical qubits through the topological properties arising from the definition of two special operators.~@Kitaev_2003[!] introduced the concept. Let us define the plaquette and vertex operators.

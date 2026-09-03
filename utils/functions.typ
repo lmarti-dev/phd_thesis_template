@@ -5,7 +5,6 @@
 #margin-note-counter.step()
 
 #let margin-note(body, style: "italic") = {
-  return // actually no side notes
   (
     [#place(
       right,
@@ -87,7 +86,7 @@
 #let theorem(body) = refable-box(body, kind: "Theorem")
 #let proposition(body) = refable-box(body, kind: "Proposition")
 #let postulate(body, title: none) = refable-box(body, kind: "Postulate", title: title)
-#let proof(body) = [_Proof_: #body]
+#let proof(body) = [_Proof_: #body $qed$]
 
 
 #let current_heading(printable: false) = {

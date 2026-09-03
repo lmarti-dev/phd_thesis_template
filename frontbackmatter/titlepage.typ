@@ -17,7 +17,7 @@
         *Doctor rerum typorum (Dr. rer. typ.)* \
 
         submitted by \
-        #upper()[*Otto Matic*] \
+        #upper()[#author] \
         born in \
         #upper()[*Hachtel*]
       ],

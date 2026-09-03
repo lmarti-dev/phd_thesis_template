@@ -1,5 +1,3 @@
-// LTeX: enabled=false
-
 #let title_fonts = (
   tex_gyre: "Tex Gyre Heros",
   miriam: "Miriam Libre",
@@ -48,6 +46,8 @@
 #let acrodict = (
  "super useful acronym": "SUA",
  "another acronym":"ANAC",
+ "a cro nym": "ACN",
+ "technique with a catchy shortening": "TWITCASH"
 )
 
 
@@ -57,5 +57,9 @@
 
 #let thesis_title = "A thesis typeset with Typst"
 #let year = 2026
-#let author = "Lucas Marti"
+#let author = "Marvin"
 
+
+
+#let short_csl = "/files/csl/citation_styles/short-and-sweet.csl"
+#let bib_csl = "/files/csl/citation_styles/thoughtful-and-coolheaded.csl"

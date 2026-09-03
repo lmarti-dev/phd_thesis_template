@@ -1,7 +1,5 @@
-// LTeX: enabled=false
-
 #import "./functions.typ": *
-#import "utils.typ": *
+#import "math.typ": *
 
 
 #let thesis_style(doc, printable: false, debug: true, draft: true) = {
@@ -15,19 +13,14 @@
     colorb = black
   }
 
-  let in-bib = state("in-bib", false)
-  let in-acronym = state("in-acronym", false)
-  let in-heading = state("in-heading", false)
-  let in-header = state("in-header", false)
-  let in-outline = state("in-outline", false)
-
+  let no-acronym = state("no-acronym", false)
 
   set page(paper: "a4", header: {
-    in-header.update(true)
+    no-acronym.update(true)
     current_heading(printable: printable)
-    in-header.update(false)
+    no-acronym.update(false)
   })
-  set page(margin: (inside: 4cm, outside: 2cm, y: 2cm)) if printable
+  set page(margin: (inside: 4cm, outside: 4cm, y: 2cm)) if printable
   set page(margin: (x: 4cm, y: 2cm)) if not printable
   show figure.caption: set text(size: body_font_size_s)
 
@@ -64,7 +57,6 @@
     }
   }
 
-
   set heading(numbering: "1.1.1. i", supplement: "Sec.")
   set text(font: body_font, size: body_font_size)
 
@@ -74,14 +66,14 @@
   }
 
   show outline.entry: it => {
-    in-outline.update(true)
+    no-acronym.update(true)
     text(
       number-type: "old-style",
     )[#it]
-    in-outline.update(false)
+    no-acronym.update(false)
   }
   show heading: it => {
-    in-heading.update(true)
+    no-acronym.update(true)
     block(
       text(
         font: body_font,
@@ -96,15 +88,20 @@
       sticky: true,
     )
     v(3pt)
-    in-heading.update(false)
+    no-acronym.update(false)
   }
 
   show <part:acronyms>: it => {
-    in-acronym.update(true)
+    no-acronym.update(true)
     it
-    in-acronym.update(false)
+    no-acronym.update(false)
   }
 
+  show raw: it => {
+    no-acronym.update(true)
+    it
+    no-acronym.update(false)
+  }
 
   show heading.where(level: 1): it => text(
     size: 1em,
@@ -113,7 +110,7 @@
     weight: "regular",
   )[
 
-    #in-heading.update(true)
+    #no-acronym.update(true)
     #if printable {
       pagebreak(to: "odd")
     } else {
@@ -134,12 +131,11 @@
     #v(-.8em)
     #line(length: 100%)
     #v(.4em)
-    #in-heading.update(false)
+    #no-acronym.update(false)
   ]
   // show heading.where(level: 4): it => block(below: 0pt) + box(inset: (right: 0.8em), it)
 
   set par(justify: true)
-
 
   set table(
     stroke: (x, y) => if y == 0 {
@@ -154,17 +150,14 @@
 
   set figure(numbering: "1.i", supplement: [Fig.])
 
-
-  // show regex("\b(" + _gate_set + ")(\b|s\b)"): set text(font: mono_font, weight: "regular")
-
-
   show cite: it => {
-    show regex("(\d+)"): ww => {
-      [#text(ww, fill: highlight_color_1, number-type: "old-style")]
+    show regex("(\d+)"): ww => context {
+      if it.form != "full" {
+        [#text(ww, fill: highlight_color_1, number-type: "old-style")]
+      } else { ww }
     }
     it
   }
-
 
   show cite: it => {
     let supp = to_string(it.supplement)
@@ -174,85 +167,83 @@
       } else if supp == "!" {
         supp = none
       }
-      cite(it.key, form: "prose", style: "../files/csl/short-and-sweet.csl", supplement: supp)
+      cite(it.key, form: "prose", style: short_csl, supplement: supp)
     } else {
       it
     }
   }
   show bibliography: it => {
-    in-bib.update(true)
+    no-acronym.update(true)
     show link: li => { text(underline(li), fill: highlight_color_1) }
     it
-    in-bib.update(false)
+    no-acronym.update(false)
   }
-  if acrodict.keys().len()!=0{
-  let acrostates = acrodict
-    .keys()
-    .fold((:), (acc, e) => {
-      acc.insert(lower(e), state("seen-" + lower(e), false))
-      return acc
-    })
+  if acrodict.keys().len() != 0 {
+    let acrostates = acrodict
+      .keys()
+      .fold((:), (acc, e) => {
+        acc.insert(lower(e), state("seen-" + lower(e), false))
+        return acc
+      })
 
+    let re = "\b((?i)" + acrodict.keys().join("|") + "|" + acrodict.values().join("|") + ")s?\b"
+    let racrodict = (:)
+    let vcapdict = (:)
+    let kcapdict = (:)
+    for c in acrodict.keys().zip(acrodict.values()) {
+      racrodict.insert(lower(c.at(1)), lower(c.at(0)))
+      kcapdict.insert(lower(c.at(0)), c.at(0))
+      vcapdict.insert(lower(c.at(1)), c.at(1))
+    }
 
-  let re = "\b((?i)" + acrodict.keys().join("|") + "|" + acrodict.values().join("|") + ")s?\b"
-  let racrodict = (:)
-  let vcapdict = (:)
-  let kcapdict = (:)
-  for c in acrodict.keys().zip(acrodict.values()) {
-    racrodict.insert(lower(c.at(1)), lower(c.at(0)))
-    kcapdict.insert(lower(c.at(0)), c.at(0))
-    vcapdict.insert(lower(c.at(1)), c.at(1))
-  }
-
-  for item in acrodict.values() + acrodict.keys() {
-    let re = "\b" + item + "s?\b"
-    let is-acronym = upper(item) == item
-    doc = {
-      show regex(re): it => {
-        let lvals = vcapdict.keys()
-        let lkeys = kcapdict.keys()
-        let tok = lower(it.text)
-        let add_s = ""
-        if tok in lvals or tok.slice(0, -1) in lvals {
-          if tok.slice(0, -1) in lvals {
+    for item in acrodict.values() + acrodict.keys() {
+      let re = "(?i)\b" + item + "s?\b"
+      let is-acronym = upper(item) == item
+      doc = {
+        show regex(re): it => {
+          let lvals = vcapdict.keys()
+          let lkeys = kcapdict.keys()
+          let tok = lower(it.text)
+          let add_s = ""
+          if tok in lvals or tok.slice(0, -1) in lvals {
+            if tok.slice(0, -1) in lvals {
+              tok = tok.slice(0, -1)
+              add_s = "s"
+            }
+            tok = racrodict.at(tok)
+          }
+          if tok not in lkeys and tok.slice(0, -1) in lkeys {
             tok = tok.slice(0, -1)
             add_s = "s"
           }
-          tok = racrodict.at(tok)
-        }
-        if tok not in lkeys and tok.slice(0, -1) in lkeys {
-          tok = tok.slice(0, -1)
-          add_s = "s"
-        }
 
-        let word = tok
-        if it.text.at(0) == upper(it.text.at(0)) {
-          word = upper(word.at(0)) + word.slice(1)
-        }
+          let word = tok
+          if it.text.at(0) == upper(it.text.at(0)) {
+            word = upper(word.at(0)) + word.slice(1)
+          }
 
-        let acronym = acrodict.at(kcapdict.at(tok))
+          let acronym = acrodict.at(kcapdict.at(tok))
 
-        context {
-          let is_body_text = not (
-            in-bib.get() or in-acronym.get() or in-heading.get() or in-header.get() or in-outline.get()
-          )
-          if is_body_text {
-            let is_first = not acrostates.at(tok).get()
-            if is_first and not is-acronym {
-              text(fill: colora)[#it.text (#acronym#add_s)]
-              acrostates.at(tok).update(true)
+          context {
+            let is_body_text = not (no-acronym.get())
+            if is_body_text {
+              let is_first = not acrostates.at(tok).get()
+              if is_first and not is-acronym {
+                text(fill: colora)[#it.text (#acronym#add_s)]
+                acrostates.at(tok).update(true)
+              } else {
+                text(fill: colorb)[#link(label("acr" + acronym), [#acronym#add_s])]
+                // text(fill: colorb)[#acronym#add_s]
+              }
             } else {
-              text(fill: colorb)[#link(label("acr" + acronym), [#acronym#add_s])]
-              // text(fill: colorb)[#acronym#add_s]
+              it
             }
-          } else {
-            it
           }
         }
+        doc
       }
-      doc
     }
-  }}
+  }
   // show regex("(\. \w)"): it => {
   //   let letter = it.text.last()
   //   ". " + upper(letter)
