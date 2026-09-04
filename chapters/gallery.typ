@@ -49,13 +49,16 @@ which gives
 
 #theorem[Peach-flavored iced tea is superior to lemon-flavored iced tea.]
 
-Theorems also usually are followed by proofs, which can be called right away with `#proof(body)`
+Theorems are also followed by proofs (usually), which can be called whenever with `#proof(body)`
 
 #proof[ It's obvious.]
 
 Again, `refable-boxes` are valid for any kind of box, so you may define other boxes.
 
-#postulate[The moon is made of cheese.]
+
+#let hot-take(body) = refable-box(body, kind: "Hot take")
+
+#hot-take[The moon is made of cheese.]
 
 The main advantage is consistent referencing.
 

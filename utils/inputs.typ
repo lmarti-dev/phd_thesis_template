@@ -1,11 +1,8 @@
 #let title_fonts = (
   tex_gyre: "Tex Gyre Heros",
-  miriam: "Miriam Libre",
-  grotesk: "Space Grotesk",
 )
 #let body_fonts = (
   old_standard: "Old Standard",
-  etbembo: "ETBembo",
   gentium: "Gentium Book Basic",
 )
 
@@ -37,8 +34,7 @@
 
 #let highlight_color_1 = rgb("#228848")
 #let highlight_color_2 = rgb("#0061A0")
-#let fau_blue = rgb("#04316a")
-#let highlight_color_3 = fau_blue
+#let highlight_color_3 = rgb("#04316a")
 #let highlight_color_4 = rgb("#041E42")
 #let muted_color = rgb("#818181")
 
@@ -47,7 +43,7 @@
  "super useful acronym": "SUA",
  "another acronym":"ANAC",
  "a cro nym": "ACN",
- "technique with a catchy shortening": "TWITCASH"
+ "technique with catchy shortened name": "TWITCASH'N"
 )
 
 
@@ -57,7 +53,7 @@
 
 #let thesis_title = "A thesis typeset with Typst"
 #let year = 2026
-#let author = "Marvin"
+#let author = "John Doestermann"
 
 
 

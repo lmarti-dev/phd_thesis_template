@@ -77,6 +77,7 @@
       ],
       fill: fill,
       inset: 10pt,
+      width: 100%,
     ),
     kind: kind,
     supplement: kind,
