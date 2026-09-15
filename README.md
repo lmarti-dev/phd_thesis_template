@@ -47,7 +47,7 @@ The file `utils/inputs.typ` contains most of the styling options.
 
 ### Default style
 
-<div style:"display:flex">
+<div style="display:flex">
 <img src="png/default_style_1.png" width="33%">
 <img src="png/default_style_6.png" width="33%">
 <img src="png/default_style_9.png" width="33%">
@@ -55,7 +55,7 @@ The file `utils/inputs.typ` contains most of the styling options.
 
 ### LaTeX style
 
-<div style:"display:flex">
+<div style="display:flex">
 <img src="png/latex_style_1.png" width="33%">
 <img src="png/latex_style_6.png" width="33%">
 <img src="png/latex_style_9.png" width="33%">
@@ -63,7 +63,7 @@ The file `utils/inputs.typ` contains most of the styling options.
 
 ### Old-school style
 
-<div style:"display:flex">
+<div style="display:flex">
 <img src="png/old_style_1.png" width="33%">
 <img src="png/old_style_6.png" width="33%">
 <img src="png/old_style_9.png" width="33%">
