@@ -25,7 +25,7 @@ Consider the Hamiltonian; $ H = - sum_p A_p - sum_k B_k $ It has four distinct d
 
 #include "../files/cetz/deformstring.typ"
 
-The three other group are the vertically winding string, $S_v$, the horizontal string, $S_h$, and their sum $S_S$. Each group is linearly independent with respect tot the $A$ and $B$ operators.
+The three other group are the vertically winding string, $S_v$, the horizontal string, $S_h$, and their sum $S_S$. Each group is linearly independent with respect to the $A$ and $B$ operators.
 
 
 #include "../files/cetz/toricgroundstate.typ"
