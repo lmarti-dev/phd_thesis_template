@@ -41,3 +41,24 @@ The file `utils/inputs.typ` contains most of the styling options.
 - Remove page header if the page starts with a title header. 
 - Add customization options for chapter numbering
 - Better margin note behaviour
+
+
+## Gallery
+
+### Default style
+
+<img src="png/default_style_1.png" width="33%">
+<img src="png/default_style_6.png" width="33%">
+<img src="png/default_style_9.png" width="33%">
+
+### LaTeX style
+
+<img src="png/latex_style_1.png" width="33%">
+<img src="png/latex_style_6.png" width="33%">
+<img src="png/latex_style_9.png" width="33%">
+
+### Old-school style
+
+<img src="png/old_style_1.png" width="33%">
+<img src="png/old_style_6.png" width="33%">
+<img src="png/old_style_9.png" width="33%">
